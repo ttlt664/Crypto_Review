@@ -33,6 +33,7 @@ for i in l:
     e = ''
     if set(i) == {1, -1, 0}:
         for j in i[:-1]:
+            # 恢复原本的值
             if j == 1:
                 e += '1'
             else:
