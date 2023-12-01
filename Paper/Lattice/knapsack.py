@@ -73,7 +73,7 @@ class Knapsack_Attacks:
         B = self.SV_Lattice(self.a,self.M)
         if self.__sv_check(B)[1]==False:
             K = Knapsack_Attacks(self.a,sum(a)-self.M)
-            K.sv_attack()
+            a_solve = K.sv_attack()
         else:
             a_solve = self.__sv_check(B)[0]
         return a_solve
