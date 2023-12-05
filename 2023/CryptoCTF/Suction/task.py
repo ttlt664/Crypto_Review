@@ -26,6 +26,7 @@ def encrypt(msg, pkey, r):
 	return C
 
 r, nbit = 8, 128
+# 丢掉了最后面的八位 然后只给出了一个和
 PKEY, pkey = keygen(nbit, r)
 print(f'PKEY = {int(PKEY, 2)}')
 FLAG = flag.lstrip(b'CCTF{').rstrip(b'}')
