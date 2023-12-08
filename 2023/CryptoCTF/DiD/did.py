@@ -2,7 +2,7 @@
 
 from random import randint
 import sys
-flag=b"123456789456789"
+flag=b"CCTF{this_is_just_a_test_flag}"
 def die(*args):
 	pr(*args)
 	quit()
@@ -29,12 +29,17 @@ def main():
 	_flag = False
 	n, l = 127, 20
 	N = set(list(range(0, n)))
+	# 这个集合里的数都是 127以下
 	K = [randint(0, n-1) for _ in range(l)]
+	print(K)
+	print("-------------------")
+	# 20个数 ,126以下
 	cnt, STEP = 0, 2 * n // l - 1
-	
+
 	while True:
 		ans = sc().decode().strip()
 		try:
+			# 不停的猜数 最后结果跟集合K相同
 			_A = [int(_) for _  in ans.split(',')]
 			if len(_A) <= l and set(_A).issubset(N):
 				DID = did(n, l, K, _A)

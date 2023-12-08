@@ -3,8 +3,9 @@
 # @Time    : 2023/12/5 15:35
 import requests
 from Crypto.Util.number import *
-PKEY = 76717969558587152375798562887929961077291822499987128569546270763178084194729
-enc = 189862862542101122892824733782145266259795828082217623925853585549680290362
+PKEY = 50123055414437499050302462829285559336179448882989670132076168892277955169943
+enc = 49628321789292870931105510357231852942115813877847583582191731584696285771
+
 e_ = int(bin(PKEY)[-8:],2)
 print(e_)
 print(e_.bit_length())
@@ -16,7 +17,7 @@ def factorize_large_number(number):
     url = f"http://factordb.com/api?query={number}"
 
     try:
-        time.sleep(random.randint(0,3))
+        time.sleep(random.uniform(0,2))
         response = requests.get(url)
         data = response.json()
         # print(data)
@@ -36,16 +37,18 @@ for i in range(2**8):
     # print(n_ << 8 + i)
     # print(nr)
     if isPrime(nr) == False:
-        if len(factorize_large_number(nr)) == 2:
+
+        # if len(factorize_large_number(nr)) == 2:
             print(factorize_large_number(nr))
 
-p = 247206233189438647228272524110963931669
-q = 310339948021443182792741136446099304149
+# p = 247206233189438647228272524110963931669
+# q = 310339948021443182792741136446099304149
 # import gmpy2
 # phi = (p-1)*(q-1)
-# for e_ in range(65537):
+# for i in range(2**8+1):
 #     try:
-#         d=gmpy2.invert(e_,phi)
+#         e = (e_<< 8) + i
+#         d=gmpy2.invert(e,phi)
 #         print(d)
 #         n1 = p *q
 #         m = gmpy2.powmod(enc,d,n1)

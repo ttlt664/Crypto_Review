@@ -20,6 +20,7 @@ def keygen(nbit, r):
 
 def encrypt(msg, pkey, r):
 	m = bytes_to_long(msg)
+	# print(m)
 	n, e = pkey
 	c = pow(m, e, n)
 	C = bin(c)[2:-r]
@@ -30,5 +31,6 @@ r, nbit = 8, 128
 PKEY, pkey = keygen(nbit, r)
 print(f'PKEY = {int(PKEY, 2)}')
 FLAG = flag.lstrip(b'CCTF{').rstrip(b'}')
+# print(FLAG)
 enc = encrypt(FLAG, pkey, r)
 print(f'enc = {int(enc, 2)}')

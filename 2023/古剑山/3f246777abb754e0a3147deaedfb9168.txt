@@ -1,0 +1,26 @@
+def _l(idx, s):
+    print(f'{s[idx:] = }, {s[:idx] = }')
+    return s[idx:] + s[:idx]
+def main(p, k1, k2):
+    s = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz_{}"
+    t = [[_l((i+j) % len(s), s) for j in range(len(s))] for i in range(len(s))]
+    i1 = 0
+    i2 = 0
+    c = ""
+    for a in p:
+        c += t[s.find(a)][s.find(k1[i1])][s.find(k2[i2])]
+        i1 = (i1 + 1) % len(k1)
+        i2 = (i2 + 1) % len(k2)
+    return c
+
+flag="flag{123123123123121231231312}"
+# key="**********"
+key = "123123124"
+
+# * 为马赛克，长度为1。 
+# hint：  可以自己尝试下运行加密函数，看看秘钥对加密结果的影响。 
+# hint：  首先根据线索求秘钥，秘钥不唯一，找到一个有效的，就能爆破flag了。 
+print (main(flag, key, key[::-1]))
+
+# 程序运行结果（即密文为）:
+# krRUy_65bqzAFlhGcWfBdm3o79nxaE
