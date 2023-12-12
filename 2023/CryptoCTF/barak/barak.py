@@ -64,3 +64,12 @@ assert m < p
 Q = mul_barak(m, P, E)
 print(f'P = {P}')
 print(f'Q = {Q}')
+
+
+
+# dlogs = []
+# for fac in primes:
+# 	t = int(P.order()) / int(fac)
+# 	dlog = discrete_log(t*Q,t*P,operation="+")
+# 	dlogs += [dlog]
+# 	print("factor: "+str(fac)+", Discrete Log: "+str(dlog)) #calculates discrete logarithm for each prime order
