@@ -14,6 +14,7 @@ print(len(e))
 nbit = len(e)
 flag = 'DASCTF{'+sha256(''.join([str(i) for i in e]).encode()).hexdigest()+'}'
 
+# 到这里能够看出是一个RSSP问题
 a = [randint(1,2^nbit) for i in range(nbit)]
 # 一共48个大数
 # 1~2**48
@@ -23,3 +24,5 @@ for i in range(nbit):
 # 这48个大数要么存在于加法线性中要么不存在
 print(a)
 print(re)
+
+

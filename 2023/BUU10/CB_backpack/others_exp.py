@@ -1,7 +1,5 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-# @Time    : 2023/12/13 11:45
-import math
+import hashlib
+from sage.all import *
 a = [65651991706497, 247831871690373, 120247087605020, 236854536567393, 38795708921144, 256334857906663,
      120089773523233, 165349388120302, 123968326805899, 79638234559694, 259559389823590, 256776519514651,
      107733244474073, 216508566448440, 39327578905012, 118682486932022, 263357223061004, 132872609024098,
@@ -10,22 +8,32 @@ a = [65651991706497, 247831871690373, 120247087605020, 236854536567393, 38795708
      118193938825623, 49625220390324, 230439888723036, 241486656550572, 107149406378865, 233503862264755,
      269502011971514, 181805192674559, 152612003195556, 184127512098087, 165959151027513, 188723045133473,
      241615906682300, 216101484550038, 81190147709444, 124498742419309]
-re = 4051501228761632
-
-def origanial4waymerge(input_list,n,T):
-
-    return
-def Schroeppel_and_Shamir_attack(a_list,S):
-    n = len(a_list)
-    q1 = math.floor(n/4)
-    q2 = math.floor(n/2)
-    q3 = math.floor(3*n/4)
-    SL1_theta = sum(a_list[i-1]*1 for i in range(1,q1+1))
-    SL1_epsilon = q1*[1]
-    SR1_theta = sum(a_list[i-1]*1 for i in range(q1+2,q2+1))
-    SR1_epslion = q2*[1]
-    SL2_theta = sum(a_list[i-1]*1 for i in range(q2+2,q3+1))
-    SL2_epslion = q2*[1]
-    SR2_theta = sum(a_list[i-1]*1 for i in range(q3+2,a))
-    SR2_epslion  = q3*[1]
-    origanial4waymerge((SL1_theta,SR1_theta,SL2_theta,SR2_theta),n,S)
+c = 4051501228761632
+def check(e: str):
+    for i in range(8):
+        l = e[6 * i:6 * i + 6]
+        if l.count('1') != l.count('0'):#在其中数0跟1要求其中0，1数量相同 可以理解
+            return 0
+    return e
+m = matrix(ZZ, 49)
+# 一个正常的格
+# 没事干的时候建议背格子
+for i in range(48):
+    m[i, i] = 2
+    m[i, -1] = a[i]
+    m[-1, i] = 1
+m[-1, -1] = c
+l = m.BKZ(block_size=30)
+e = ''
+for i in l:
+    e = ''
+    if set(i) == {1, -1, 0}:
+        for j in i[:-1]:
+            # 恢复原本的值
+            if j == 1:
+                e += '1'
+            else:
+                e += '0'
+        if check(e):
+            flag = 'DASCTF{' + hashlib.sha256(e.encode()).hexdigest() + '}'
+            print(flag)
